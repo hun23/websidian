@@ -8,8 +8,7 @@ import {
 	PluginSettingTab,
 	Setting,
 } from "obsidian";
-
-import { buildDirectoryStructure } from "utils";
+import { createEncryptedFileToUpload } from "utils";
 
 // Remember to rename these classes and interfaces!
 
@@ -28,7 +27,7 @@ export default class WebsidianPlugin extends Plugin {
 
 	async onload() {
 		await this.loadSettings();
-		
+
 		this.addCommand({
 			id: "open-websidian-upload-modal",
 			name: "Open websidian upload modal",
@@ -63,19 +62,11 @@ class WebsidianUploadModal extends Modal {
 
 	onOpen() {
 		const { contentEl } = this;
-		const str = app.vault.getRoot()
-		console.log(str)
-		const str2 = app.vault.getFiles()
-		console.log(str2)
-		buildDirectoryStructure(str2.map((v) => {
-			return v.path
-		}))
 		contentEl.setText("Upload status here!");
 		// show upload status here
 		// encrypting
-			// get vault directory
-			// zip everything not in public
-			// encrypt it with pw
+		// const fileToUpload: Blob = createEncryptedFileToUpload()
+		const a = createEncryptedFileToUpload("thisispassword");
 		// uploading
 		// done
 	}
